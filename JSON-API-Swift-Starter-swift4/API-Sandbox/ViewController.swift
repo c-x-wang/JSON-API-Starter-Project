@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
     
-//    let randMovie: Movie
+    var randMovie: Movie!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +50,11 @@ class ViewController: UIViewController {
                         allRandMovies.append(Movie(json: movie))
                     }
                     
-                    let randMovie = allRandMovies[Int(arc4random_uniform(UInt32(allRandMovies.count)))]
+                    self.randMovie = allRandMovies[Int(arc4random_uniform(UInt32(allRandMovies.count)))]
                     
-                    print("This movie is \(randMovie.name) by \(randMovie.rightsOwner). It costs $\(randMovie.price) and was released on \(randMovie.releaseDate). You can view it on iTunes here: \(randMovie.link)")
+                    print("This movie is \(self.randMovie.name) by \(self.randMovie.rightsOwner). It costs $\(self.randMovie.price) and was released on \(self.randMovie.releaseDate). You can view it on iTunes here: \(self.randMovie.link)")
                     
-                    self.loadPoster(urlString: randMovie.poster)
+                    self.loadPoster(urlString: self.randMovie.poster)
                     
                     
                 }
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func viewOniTunesPressed(_ sender: AnyObject) {
-//        UIApplication.shared.openURL(URL(string: randMovie.link)!)
+        UIApplication.shared.openURL(URL(string: self.randMovie.link)!)
     }
     
 }
